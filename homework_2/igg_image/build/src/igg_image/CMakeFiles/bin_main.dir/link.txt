@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wextra -fPIC -O3  -rdynamic CMakeFiles/bin_main.dir/main.cpp.o  -o ../../../bin/bin_main -Wl,-rpath,/home/piet/Projects/modern-cpp-course/homework_2/igg_image/lib ../../../lib/libio_tools.so ../../../lib/libimage.a 
