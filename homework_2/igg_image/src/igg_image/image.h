@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 namespace igg {
 
@@ -23,6 +24,12 @@ public:
   	// access or set individual pixel values
   	int at(const int& row, const int& col) const {return data_.at(rows_*row + col);}
   	int& at(const int& row, const int& col) {return data_.at(rows_*row + col);}
+
+    // print data_
+    void Print() const {
+        for (auto it = data_.begin(); it != data_.end(); it++)
+            std::cout << *it << std::endl;
+    }
 
   	// Fill data from disk from a *.pgm file. Return true if succesful 
   	bool FillFromPgm(const std::string& file_name);

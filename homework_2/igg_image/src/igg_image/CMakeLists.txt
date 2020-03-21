@@ -1,11 +1,13 @@
-find_library(TOOLS libio_tools.so ${LIBRARY_OUTPUT_PATH})
+find_library(TOOLS NAMES io_tools PATHS ${LIBRARY_OUTPUT_PATH})
 add_library(image image.cpp)
 
-add_executable(lib libio_tools.so)
+add_library(io_tools SHARED IMPORTED)
+set_property(TARGET io_tools PROPERTY IMPORTED_LOCATION "${TOOLS}")
+
 add_executable(bin_main main.cpp)
 
 target_link_libraries(bin_main 
-					${TOOLS}
-					image)
+					image
+					io_tools)
 
 
