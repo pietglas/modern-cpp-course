@@ -54,24 +54,25 @@ std::vector<float> Image::ComputeHistogram(const int& bins) const {
 		std::vector<int> remaining_pixels_updated;
 		remaining_pixels_updated.reserve(remaining_pixels.size());
 
+		// set bin_count to float to ensure that division returns proper float
+		float bin_count_fl = bin_count;
+
 		// set counters for pixels in this binary                       
-		int pixels_in_this_binary = 0;
+		float pixels_in_this_binary = 0;
 		float pixels_in_this_binary_norm = 0;
 
-		// set boundaries of current bin	
-		float bin_lower_bound = (bin_count/bins) * max_val_;
-		float bin_upper_bound = ((bin_count+1)/bins) * max_val_;
+		// set upper boundary for current bin	
+		float bin_upper_bound = ((bin_count_fl+1)/bins) * max_val_;
 		
 		// check among the remaining pixels if they belong to this bin
 		for (int i : remaining_pixels) {
 
-			// continue if the pixel does not fall within the current binary. Else, add it. 
-			if (i < bin_lower_bound || bin_upper_bound <= i) {
-				remaining_pixels_updated.push_back(i);
-				continue;
-			}
-			else
+			// add pixel to binary if it falls within the binary region. else, add it
+			// to remaining pixels.  
+			if (i <= bin_upper_bound) 
 				pixels_in_this_binary += 1;
+			else
+				remaining_pixels_updated.push_back(i);
 		}
 		// normalize the number of pixels in the bin
 		pixels_in_this_binary_norm = pixels_in_this_binary / data_.size();
@@ -83,11 +84,11 @@ std::vector<float> Image::ComputeHistogram(const int& bins) const {
 	return histogram;
 }
 
-// Downscale the image by taking averages and rounding to the nearest integer. 
+// Downscale the image. 
 void Image::DownScale(const int& scale){
-	// set the dimensions
-	float new_rows = round(rows_ / scale);
-	float new_cols = round(cols_ / scale);
+	// set the dimensions, neglect decimal part. 
+	int new_rows = rows_ / scale;
+	int new_cols = cols_ / scale;
 
 	// declare the new data
 	std::vector<int> new_data;
@@ -97,20 +98,25 @@ void Image::DownScale(const int& scale){
 	for (int row = 0; row != new_rows; row++) {
 		for (int col = 0; col != new_cols; col++) {
 			int new_pixel;
-			int sum = 0; 
-
-			// calculate the average from the appropriate block
-			for (int sub_row = row * scale; sub_row < row * (scale+1) 
-				&& sub_row < rows_; ++sub_row) {
-				for (int sub_col = col * scale; sub_col < col * (scale+1)
-					&& sub_col < cols_; ++sub_col) {
+			int sum = 0, ctr = 0;
+			std::cout << "row " << row << "; col " << col << std::endl;
+			// locate the block over which we want to take the average
+			for (int sub_row = row * scale; (sub_row < (row*scale + scale)) 
+				&& (sub_row < rows_); sub_row++) {
+				//std::cout << "sub row: " << sub_row << std::endl;
+				for (int sub_col = col * scale; (sub_col < (col*scale + scale))
+					&& (sub_col < cols_); sub_col++) {
+					//std::cout << "sub col: " << sub_col << std::endl;
 					sum += data_[sub_row*cols_ + sub_col];
+					ctr += 1;
+					//std::cout << "bdr: " << col*scale + scale << std::endl;
 				}
-			new_pixel = sum / (scale*scale);
-
+			}
+			new_pixel = sum / ctr;
+			//std::cout << "pixel at row " << row << ", col " << col << ": " 
+			<< new_pixel << std::endl;
 			// add the pixel 
 			new_data.push_back(new_pixel);
-			}
 		}
 	}
 	// set new values

@@ -27,6 +27,7 @@ public:
 
     // print data_
     void Print() const {
+        std::cout << "Printing data: " << std::endl;
         for (auto it = data_.begin(); it != data_.end(); it++)
             std::cout << *it << std::endl;
     }
