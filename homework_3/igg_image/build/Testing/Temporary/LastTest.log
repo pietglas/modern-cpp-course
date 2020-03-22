@@ -1,0 +1,30 @@
+Start testing: Mar 23 00:23 CET
+----------------------------------------------------------
+1/1 Testing: test_image
+1/1 Test: test_image
+Command: "/home/piet/Projects/modern-cpp-course/homework_3/igg_image/bin/test_image"
+Directory: /home/piet/Projects/modern-cpp-course/homework_3/igg_image/build/tests
+"test_image" start time: Mar 23 00:23 CET
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from TestImage
+[ RUN      ] TestImage.ReadWriteTest
+data has been saved to disk 
+[       OK ] TestImage.ReadWriteTest (1 ms)
+[----------] 1 test from TestImage (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_image" end time: Mar 23 00:23 CET
+"test_image" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 23 00:23 CET

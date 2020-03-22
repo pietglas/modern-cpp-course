@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/piet/Projects/modern-cpp-course/homework_3/igg_image/lib/libgtest.a  CMakeFiles/gtest.dir/src/gtest-all.cc.o
+/usr/bin/ranlib /home/piet/Projects/modern-cpp-course/homework_3/igg_image/lib/libgtest.a
