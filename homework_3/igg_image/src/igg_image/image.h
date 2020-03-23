@@ -33,6 +33,7 @@ class Image {
   // get funtions
   const int& rows() const {return rows_;}
   const int& cols() const {return cols_;}
+  const int& max_val() const {return max_val_;}
 
   // access or set individual pixel values
   Pixel at(const int& row, const int& col) const {return data_.at(cols_*row + col);}
