@@ -38,12 +38,10 @@ template <typename T>
 T DecimalMagnitude(const T& nr, const int& max_iter) {
 	int nr_int = int(nr);
 	T lost_decimal = nr - nr_int;		// in general, this can be ill-behaved for float (?)
-	std::cout << "remainder: " << lost_decimal << std::endl;
 	int order = 0; 
 	T test_value = 0.1, difference = 0.0;
 	while ((difference == 0.0) && (order < max_iter)) {
 		difference = lost_decimal - test_value;
-		std::cout << "difference: " << difference << std::endl;
 		if (difference < 0) {
 			test_value /= 10;
 			order +=1;
