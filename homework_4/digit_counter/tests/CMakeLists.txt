@@ -6,7 +6,6 @@ set(TEST_BINARY ${PROJECT_NAME}_test)
 add_executable(test_digit tests.cpp)
 
 target_link_libraries(test_digit
-					  digit_counting
 					  gtest gtest_main)
 
 add_test(test_image ${PROJECT_SOURCE_DIR}/bin/test_digit)
