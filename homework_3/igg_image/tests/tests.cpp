@@ -13,9 +13,9 @@ TEST(TestImage, ReadWriteTest) {
 	igg::Image im;
 	im.SetIoStrategy(strategy_ptr);
 	std::string find_path = "/home/piet/Projects/modern-cpp-course/homework_3/"
-					"igg_image/data/sign_1.ppm";
+					"igg_image/data/pbmlib.ascii.ppm";
 	std::string save_path = "/home/piet/Projects/modern-cpp-course/homework_3/"
-					"igg_image/data/sign_2.ppm";
+					"igg_image/data/pbmlib2.ascii.ppm";
 	EXPECT_EQ(im.ReadFromDisk(find_path), true);
 	EXPECT_EQ(im.WriteToDisk(save_path), true);
 }
