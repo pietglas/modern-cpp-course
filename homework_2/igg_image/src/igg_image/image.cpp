@@ -9,24 +9,24 @@ using namespace igg;
 
 // Fill data from disk from a *.pgm file. Return true if succesful
 bool Image::FillFromPgm(const std::string& file_name) {
-  	io_tools::ImageData image_data = io_tools::ReadFromPgm(file_name);	// save data in a struct
+  io_tools::ImageData image_data = io_tools::ReadFromPgm(file_name);	// save data in a struct
 
-  	// If the returned struct is nonempty, set values
-  	if (image_data.data.size() == 0) {
-  		// set values
-  		rows_ = image_data.rows;
-  		cols_ = image_data.cols;
-  		max_val_ = image_data.max_val;
-  		data_.reserve(image_data.data.size());	// reserve memory 
-  		for (int i = 0; i != data_.size(); ++i) {
-  			data_.push_back(image_data.data[i]); 
-  		}
-  		return true;
+  // If the returned struct is nonempty, set values
+  if (image_data.data.size() == 0) {
+  	// set values
+  	rows_ = image_data.rows;
+  	cols_ = image_data.cols;
+  	max_val_ = image_data.max_val;
+  	data_.reserve(image_data.data.size());	// reserve memory 
+  	for (int i = 0; i != data_.size(); ++i) {
+  		data_.push_back(image_data.data[i]); 
   	}
+ 		return true;
+ 	}
 
-  	// return false if the returned struct is empty 
-  		else
- 			return false;
+  // return false if the returned struct is empty 
+ 	else
+  	return false;
 }
 
 // Write data to a *.pgm file. 
@@ -34,10 +34,10 @@ void Image::WriteToPgm(const std::string& file_name) {
 	io_tools::ImageData image_data{rows_, cols_, max_val_, data_};	// save data in struct
 	bool write = io_tools::WriteToPgm(image_data, file_name);	// write data to file
   		
-  	// Notify if the writing did not succeed. 
-  	if (!write) {
-  		std::cout << "Something went wrong in the writing proces" << std::endl;
-  	}
+  // Notify if the writing did not succeed. 
+ 	if (!write) {
+ 		std::cout << "Something went wrong in the writing proces" << std::endl;
+ 	}
 }
 
 // Compute histogram over the pixels

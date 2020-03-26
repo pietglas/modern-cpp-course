@@ -22,8 +22,8 @@ public:
   	const int& cols() const {return cols_;}
 
   	// access or set individual pixel values
-  	int at(const int& row, const int& col) const {return data_.at(rows_*row + col);}
-  	int& at(const int& row, const int& col) {return data_.at(rows_*row + col);}
+  	int at(const int& row, const int& col) const {return data_.at(cols_*row + col);}
+  	int& at(const int& row, const int& col) {return data_.at(cols_*row + col);}
 
     // print data_
     void Print() const {
