@@ -13,30 +13,3 @@ target_link_libraries(test_image
 
 add_test(test_image ${PROJECT_SOURCE_DIR}/bin/test_image)
 
-
-
-
-
-
-
-
-
-
-
-
-# add_executable(
-#  ${TEST_BINARY}
-#  # test_init.cpp
-#  # test_resize.cpp
-#  # test_dummy_strategy.cpp
-#  # test_histogram.cpp
-#  # test_from_ppm.cpp
-#  # test_from_png.cpp
-# )
-# target_link_libraries(${TEST_BINARY}
-#   image
-#   gtest gtest_main
-# )
-# add_test(
-#   NAME ${TEST_BINARY}
-#   COMMAND ${EXECUTABLE_OUTPUT_PATH}/${TEST_BINARY})

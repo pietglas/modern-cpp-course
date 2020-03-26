@@ -9,7 +9,7 @@ using namespace igg;
 bool Image::ReadFromDisk(const std::string& file_name) {
 	// Use read method from io_strategy to obtain the data
 	bool return_val;
-	ImageData im_data = io_strategy_.Read(file_name);
+	ImageData im_data = strategy_ptr_->Read(file_name);
 	if (im_data.rows == 0) {
 		std::cout << "file not found" << std::endl;
 		return_val = false;
@@ -40,7 +40,7 @@ bool Image::WriteToDisk(const std::string& file_name) const {
 	ImageData im_data{rows_, cols_, max_val_, data};
 
 	// use write method from io_strategy to write data to disk
-	bool succes = io_strategy_.Write(file_name, im_data);
+	bool succes = strategy_ptr_->Write(file_name, im_data);
 	if (succes) {
 		std::cout << "data has been saved to disk " << std::endl;
 	}
@@ -48,7 +48,7 @@ bool Image::WriteToDisk(const std::string& file_name) const {
 		std::cout << "an error occured" << std::endl;
 	}
 	return succes;
-}
+} 
 
 
 // Downscale the image. 

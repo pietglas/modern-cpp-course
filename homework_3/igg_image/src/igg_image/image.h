@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <memory>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -21,19 +22,23 @@ class Image {
   };
 
   // Constructors. If arguments rows and cols are provided, initialize a black image. 
-  Image(const IoStrategy& io_strategy): io_strategy_{io_strategy} {}
-  Image(int rows, int cols, const IoStrategy& io_strategy): rows_{rows}, cols_{cols}, 
-    io_strategy_{io_strategy} {
+  Image() {}
+  Image(int rows, int cols, std::shared_ptr<IoStrategy> strategy_ptr): 
+    rows_{rows}, cols_{cols}, strategy_ptr_{strategy_ptr} {
       Pixel black_pixel{0, 0, 0};
-      data_.reserve(rows * cols);
-      for (int i = 0; i != rows*cols; i++)
-        data_.push_back(black_pixel);
+      data_.resize(rows * cols);
+      std::fill(data_.begin(), data_.end(), black_pixel);
     }
 
   // get funtions
   const int& rows() const {return rows_;}
   const int& cols() const {return cols_;}
   const int& max_val() const {return max_val_;}
+
+  // set strategy
+  void SetIoStrategy(const std::shared_ptr<IoStrategy>& strategy_ptr) {
+    strategy_ptr_ = strategy_ptr;
+  }
 
   // access or set individual pixel values
   Pixel at(const int& row, const int& col) const {return data_.at(cols_*row + col);}
@@ -55,7 +60,7 @@ class Image {
   void UpScale(const int& scale);
 
  private:
-  const IoStrategy& io_strategy_;
+  std::shared_ptr<IoStrategy> strategy_ptr_ = nullptr;
   int rows_ = 0;
   int cols_ = 0;
   int max_val_ = 255;
